@@ -1,8 +1,7 @@
-export const tableKeys = {
-  COMPANY: "company",
-  CONTACT: "contact",
-  COUNTRY: "country",
-};
+import jsonData from "../data/Data.json";
+
+export const tableKeys = jsonData.tableKeys;
+
 export const tableHeaders = {
   [tableKeys.COMPANY]: {
     columnLabel: "Company Name",
@@ -17,23 +16,5 @@ export const tableHeaders = {
     key: tableKeys.COUNTRY,
   },
 };
-export const data = [
-  {
-    company: "Alfreds Futterkiste",
-    contact: "Maria Anders",
-    country: "Germany",
-  },
-  {
-    company: "Centro comercial Moctezuma",
-    contact: "Francisco Chang",
-    country: "Mexico",
-  },
-  { company: "Ernst Handel", contact: "Roland Mendel", country: "Austria" },
-  { company: "Island Trading", contact: "Helen Bennett", country: "UK" },
-  {
-    company: "Laughing Bacchus Winecellars",
-    contact: "Yoshi Tannamuri",
-    country: "Canada",
-  },
-  { company: "Italy", contact: "Giovanni Rovelli", country: "Italy" },
-];
+
+export const data = jsonData.data;
