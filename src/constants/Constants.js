@@ -1,4 +1,4 @@
-import jsonData from "../data/Data.json";
+import jsonData from "../data/TableData.json";
 
 export const tableKeys = jsonData.tableKeys;
 

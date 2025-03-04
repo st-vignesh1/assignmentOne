@@ -1,4 +1,4 @@
-import RenderTable from "../components/table/RenderTable";
+import RenderTable from "../components/core/table/RenderTable";
 import { data, tableHeaders } from "../constants/Constants";
 
 function TablePage() {
@@ -10,9 +10,7 @@ function TablePage() {
       <RenderTable
         headers={headers}
         data={data}
-        headerStyle="w-10 text-left border-1 border-gray-200 p-2"
         dataRowStyle="odd:bg-gray-300 even:bg-white"
-        dataContentStyle="border-1 border-gray-200 p-2"
       />
     </div>
   );
