@@ -1,15 +1,10 @@
 import PropTypes from "prop-types";
 import React from "react";
-export default function TableData({
-  headers,
-  val,
-  dataContentStyle,
-  dataRowStyle,
-}) {
+export default function TableData({ headers, val, dataRowStyle }) {
   return (
     <tr className={dataRowStyle}>
       {headers.map((header, index) => (
-        <td className={dataContentStyle} key={index}>
+        <td className="border-1 border-gray-200 p-2" key={index}>
           {val[header.key]}
         </td>
       ))}

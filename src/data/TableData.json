@@ -1,9 +1,4 @@
 {
-  "tableKeys": {
-    "COMPANY": "company",
-    "CONTACT": "contact",
-    "COUNTRY": "country"
-  },
   "data": [
     {
       "company": "Alfreds Futterkiste",
