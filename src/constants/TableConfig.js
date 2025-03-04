@@ -1,19 +1,23 @@
 import jsonData from "../data/TableData.json";
 
-export const tableKeys = jsonData.tableKeys;
+export const columnKeys = {
+  COMPANY: "company",
+  CONTACT: "contact",
+  COUNTRY: "country",
+};
 
 export const tableHeaders = {
-  [tableKeys.COMPANY]: {
+  [columnKeys.COMPANY]: {
     columnLabel: "Company Name",
-    key: tableKeys.COMPANY,
+    key: columnKeys.COMPANY,
   },
-  [tableKeys.CONTACT]: {
+  [columnKeys.CONTACT]: {
     columnLabel: "Contact",
-    key: tableKeys.CONTACT,
+    key: columnKeys.CONTACT,
   },
-  [tableKeys.COUNTRY]: {
+  [columnKeys.COUNTRY]: {
     columnLabel: "Country",
-    key: tableKeys.COUNTRY,
+    key: columnKeys.COUNTRY,
   },
 };
 

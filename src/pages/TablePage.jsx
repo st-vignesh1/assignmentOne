@@ -1,5 +1,5 @@
 import RenderTable from "../components/core/table/RenderTable";
-import { data, tableHeaders } from "../constants/Constants";
+import { data, tableHeaders } from "../constants/TableConfig";
 
 function TablePage() {
   const headers = Object.keys(tableHeaders).map(
