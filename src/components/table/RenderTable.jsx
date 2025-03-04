@@ -24,8 +24,8 @@ export default function RenderTable({
         </tr>
       </thead>
       <tbody>
-        {data.length > 0 &&
-          data.map((val, index) => (
+        {data?.length > 0 &&
+          data?.map((val, index) => (
             <TableData
               val={val}
               headers={headers}
