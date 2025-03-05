@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import React from "react";
-import TableHeader from "./TableHeader";
 export default function RenderTable({ headers, data, dataRowStyle }) {
   return (
     headers && <table className="w-full border-1 border-gray-200 capitalize ">
@@ -8,7 +7,9 @@ export default function RenderTable({ headers, data, dataRowStyle }) {
         <tr className="w-full">
           {headers?.length &&
             headers.map((header, index) => (
-              <TableHeader key={index} header={header} />
+              <th className="w-10 text-left border-1 border-gray-200 p-2" key={index}>
+                {header}
+              </th>
             ))}
         </tr>
       </thead>

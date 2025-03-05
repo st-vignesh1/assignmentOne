@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AppLayout from "./pages/AppLayout";
+import AppLayout from "./routes/AppLayout";
 import Home from "./pages/Home";
 import { Provider, } from "react-redux";
-import store from "./features/store/Store";
+import store from "./redux/store/Store";
 
 
 
