@@ -1,14 +1,9 @@
-import { useSelector } from "react-redux";
 import RenderTable from "../components/core/table/RenderTable";
-import { data, tableHeaders } from "../constants/TableConfig";
 
-function TablePage() {
-  const headers = Object.keys(tableHeaders).map(
-    (header) => tableHeaders[header]
-  );
 
+function TablePage({ headers, data }) {
   return (
-    <div className="box-border w-full h-[100vh] pt-20 pl-10 pr-10">
+    <div className="box-border w-full h-fit pt-10 ">
       <RenderTable
         headers={headers}
         data={data}

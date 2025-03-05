@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import API_KEY from "../../constants/ApiKey"
+
 import axios from "axios"
 const initialState = {
     loading: false,
     stockData: [],
+    topGainers: [],
+    topLosers: [],
     error: ""
 }
 
@@ -13,6 +15,8 @@ const stockSlice = createSlice({
     reducers: {
         setStockDate(state, action) {
             state.stockData = action.payload;
+            state.topGainers = action.payload.top_gainers;
+            state.topLosers = action.payload.top_losers;
         },
         setLoading(state, action) {
             state.loading = action.payload
@@ -25,8 +29,11 @@ export const fetchStockData = createAsyncThunk('stockSlice/fetchStockData', asyn
         console.log("in thunk")
         dispatch(setLoading(true));
         const response = await axios.get("src/data/StockData.json");
+        if (response.statusText !== "OK") {
+            setLoading(false);
+            throw new Error("Some Error Ocuured!")
+        }
         setLoading(false);
-        console.log("response", response);
         dispatch(setStockDate(response?.data));
     } catch (error) {
         console.error('Error fetching stock data:', error);

@@ -6,14 +6,20 @@ import { fetchStockData } from '../features/slices/StockSlice'
 export default function Home() {
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log("hello")
         dispatch(fetchStockData())
     }, []);
-    const data = useSelector(state => state.stock.stockData)
+    const { stockData: { headers }, topGainers, topLosers } = useSelector(state => state.stock)
+
     return (
-        <div className='bg-amber-200 w-full min-h-screen p-8 flex gap-4'>
-            <TablePage />
-            <TablePage />
+        <div className='w-full min-h-screen p-8 flex gap-4 '>
+            <div className='w-full min-h-screen'>
+                <h3 className='text-center font-bold  text-green-600'>TOP GAINERS</h3>
+                <TablePage headers={headers && headers} data={topGainers} />
+            </div>
+            <div className='w-full min-h-screen '>
+                <h3 className='text-center font-bold text-red-600'>TOP LOSERS</h3>
+                <TablePage headers={headers} data={topLosers} />
+            </div>
         </div>
     )
 }
