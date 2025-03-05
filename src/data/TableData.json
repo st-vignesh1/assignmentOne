@@ -25,6 +25,10 @@
       "contact": "Yoshi Tannamuri",
       "country": "Canada"
     },
-    { "company": "Italy", "contact": "Giovanni Rovelli", "country": "Italy" }
+    {
+      "company": "Italy",
+      "contact": "Giovanni Rovelli",
+      "country": "Italy"
+    }
   ]
 }
