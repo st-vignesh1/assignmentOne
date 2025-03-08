@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "@reduxjs/toolkit";
 
 const selectLoading = (state) => state.stock.loading;
 const selectStockData = (state) => state.stock.stockData;

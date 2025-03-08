@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import TablePage from './TablePage'
 import {  useDispatch, useSelector } from 'react-redux'
 import { selectStockHeaders, selectTopGainers, selectTopLosers } from '../redux/selectors/stockSelector';
 import { fetchStockData } from '../redux/reducers/stockReducer';
+import StockTable from '../components/stockTable';
 
 
 export default function Home() {
@@ -15,14 +15,8 @@ export default function Home() {
     }, []);
     return (
         <div className='w-full min-h-screen p-8 flex gap-4 '>
-            <div className='w-full min-h-screen'>
-                <h3 className='text-center font-bold  text-green-600'>TOP GAINERS</h3>
-                <TablePage headers={headers && headers} data={topGainers} />
-            </div>
-            <div className='w-full min-h-screen '>
-                <h3 className='text-center font-bold text-red-600'>TOP LOSERS</h3>
-                <TablePage headers={headers} data={topLosers} />
-            </div>
+            <StockTable title={"Top Gainers"} headers={headers} data={topGainers} titleColor={"text-green-600"}/>
+            <StockTable title={"Top Losers"} headers={headers} data={topLosers} titleColor={"text-red-600"}/>
         </div>
     )
 }
