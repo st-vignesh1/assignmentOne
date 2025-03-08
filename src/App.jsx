@@ -1,6 +1,13 @@
-import TablePage from "./pages/TablePage";
+import { BrowserRouter } from "react-router-dom";
+import { Provider} from "react-redux";
+import store from "./redux/store/store";
+import RouterContainer from "./routes";
 
 function App() {
-  return <TablePage />;
+  return <Provider store={store}>
+    <BrowserRouter>
+      <RouterContainer />
+    </BrowserRouter>
+  </Provider>
 }
 export default App;
