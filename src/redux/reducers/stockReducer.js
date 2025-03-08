@@ -28,14 +28,12 @@ export const fetchStockData = createAsyncThunk('stockSlice/fetchStockData', asyn
         dispatch(setLoading(true));
         const response = await axios.get("src/data/StockData.json");
         if (response.statusText !== "OK") {
-            dispatch(setLoading(false));
             throw new Error("Some Error Ocuured!")
         }
-        dispatch(setLoading(false));
-        setTimeout(()=>{dispatch(setStockData(response?.data))},2000)
+       dispatch(setStockData(response?.data))
+       dispatch(setLoading(false));
     } catch (error) {
         console.error('Error fetching stock data:', error);
-        throw error;
     }
 })
 

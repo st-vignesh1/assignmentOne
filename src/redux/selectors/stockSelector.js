@@ -1,18 +1,11 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-const selectLoading = (state) => state.stock.loading;
-const selectStockData = (state) => state.stock.stockData;
-const selectTopGainers = (state) => state.stock.topGainers;
-const selectTopLosers = (state) => state.stock.topLosers;
 
+const selectStock = state=>state.stock;
+const selectLoading =createSelector(selectStock,stock=>stock.loading)
+const selectStockData= createSelector(selectStock,stock=>stock.stockData)
 const selectStockHeaders = createSelector([selectStockData], (stockData) => stockData.headers)
+const selectTopGainers=createSelector(selectStock,stock=>stock.topGainers)
+const selectTopLosers=createSelector(selectStock,stock=>stock.topLosers)
 
-const selectTopStock = createSelector(
-    [selectTopGainers, selectTopLosers],
-    (topGainers, topLosers) => ({
-        topGainers,
-        topLosers
-    })
-);
-
-export { selectLoading, selectStockData, selectTopGainers, selectTopLosers, selectTopStock, selectStockHeaders };
+export { selectStock,selectLoading, selectStockData, selectTopGainers, selectTopLosers, selectStockHeaders };
