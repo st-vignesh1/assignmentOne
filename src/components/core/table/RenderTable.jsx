@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
-export default function RenderTable({ headers, data, dataRowStyle }) {
+import { Link } from "react-router-dom";
+export default function RenderTable({ headers, data, dataRowStyle ,linkColumn}) {
 
   return (
      <table className="w-full border-1 border-gray-200 capitalize ">
@@ -20,8 +21,13 @@ export default function RenderTable({ headers, data, dataRowStyle }) {
             <tr className={dataRowStyle} key={index}>
               {headers?.length ? headers.map((header, ind) => (
                 <td className="border-1 border-gray-200 p-2 " key={`${index}.${ind}`}>
-                  {val && typeof val ==="object" && val[header]!==undefined? val[header]:"N/A"}
-                </td>
+                  {linkColumn && header === linkColumn ?
+                  <Link to={header===linkColumn ?`/company/${val[header]}` :"" } >
+                  {val && typeof val ==="object" && val[header]!==undefined? val[header]:"N/A"} 
+                  </Link>
+                  :      val && typeof val ==="object" && val[header]!==undefined? val[header]:"N/A" }
+                  </td>
+               
               )):<td className="text-center">Invalid Header</td>}
             </tr>
           )):
@@ -39,4 +45,5 @@ RenderTable.propTypes = {
     PropTypes.objectOf([PropTypes.string, PropTypes.number])
   ).isRequired,
   dataRowStyle: PropTypes.string,
+  linkColumn:PropTypes.string
 };

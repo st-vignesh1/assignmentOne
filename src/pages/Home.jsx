@@ -16,8 +16,8 @@ export default function Home() {
 
     return (
         <div className='w-full min-h-screen p-8 flex gap-4 '>
-            <StockTable title={"Top Gainers"} headers={headers} data={topGainers} titleColor={"text-green-600"}/>
-            <StockTable title={"Top Losers"} headers={headers} data={topLosers} titleColor={"text-red-600"}/>
+            <StockTable title={"Top Gainers"} headers={headers} data={topGainers} titleColor={"text-green-600"} linkColumn="ticker"/>
+            <StockTable title={"Top Losers"} headers={headers} data={topLosers} titleColor={"text-red-600"} linkColumn="ticker"/>
         </div>
     )
 }
