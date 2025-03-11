@@ -25,8 +25,20 @@ const companyDetailSlice = createSlice({
 
 })
 
-
-
+export const fetchCompanyData = createAsyncThunk('companyDetailSlice/fetchCompanyData',async (companyName,{dispatch})=>{
+    try{
+        dispatch(setLoading(true))
+        const response =await axios.get(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo`)
+        // if (response.statusText !== "OK") {
+        //     throw new Error("Some Error Ocuured!")
+        // }
+        console.log(response.data)
+        dispatch(setCompanyData(response?.data));
+        dispatch(setLoading(false));
+    }catch(error){
+        console.error("Error fetching data:",error)
+    }
+})
 
 
 export const {setLoading,setCompanyData} = companyDetailSlice.actions; 
