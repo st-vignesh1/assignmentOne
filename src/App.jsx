@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import { Provider} from "react-redux";
-import store from "./redux/store/store";
+import store from "../src/redux/store/Store"
 import RouterContainer from "./routes";
 
 function App() {
