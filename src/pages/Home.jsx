@@ -1,18 +1,21 @@
 
 import StockTable from '../components/stockTable';
 import { useDispatch, useSelector } from "react-redux";
-import { selectStockHeaders, selectTopGainers, selectTopLosers } from "../redux/selectors/stockSelector";
+import { selectLoading, selectStockHeaders, selectTopGainers, selectTopLosers } from "../redux/selectors/stockSelector";
 import { useEffect } from "react";
 import { fetchStockData } from "../redux/reducers/stockReducer";
+import LoadingSpinner from '../components/core/loadingSpinner/LoadingSpinner';
 export default function Home() {
     const headers = useSelector(selectStockHeaders);
     const topGainers = useSelector(selectTopGainers);
-    const topLosers = useSelector(selectTopLosers)
+    const topLosers = useSelector(selectTopLosers);
+    const isLoading = useSelector(selectLoading);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchStockData())
     }, [dispatch]);
 
+    if((!headers || !topGainers || !topLosers) || isLoading ) return <div className='w-full h-screen flex justify-center items-center'><LoadingSpinner/></div>
 
     return (
         <div className='w-full min-h-screen p-8 flex gap-4 '>

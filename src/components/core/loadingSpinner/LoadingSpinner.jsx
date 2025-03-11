@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function LoadingSpinner() {
+export default function LoadingSpinner({height}) {
   return (
+    <div className={`w-full flex items-center justify-center ${height}`}>
       <img src="/DoubleRingLoadingSpinner.svg" alt="Loading spinner"/>
+      </div>
   )
 }

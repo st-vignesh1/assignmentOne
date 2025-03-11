@@ -1,9 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
-
-
 const initialState={
     selectedCompanyData:[],
     isLoading:false,
@@ -29,10 +26,6 @@ export const fetchCompanyData = createAsyncThunk('companyDetailSlice/fetchCompan
     try{
         dispatch(setLoading(true))
         const response =await axios.get(`https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo`)
-        // if (response.statusText !== "OK") {
-        //     throw new Error("Some Error Ocuured!")
-        // }
-        console.log(response.data)
         dispatch(setCompanyData(response?.data));
         dispatch(setLoading(false));
     }catch(error){
