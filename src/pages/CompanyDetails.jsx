@@ -12,10 +12,15 @@ import { selectAnnualIncomeReport } from '../redux/selectors/companyIncomeSelect
 export default function CompanyDetails() {
     const {ticker} =useParams();
     const dispatch = useDispatch();
+
+
     useEffect(()=>{
-      dispatch(fetchCompanyData(ticker))
-      dispatch(fetchCompanyIncomeData(ticker))
+      if(ticker){
+        dispatch(fetchCompanyData(ticker))
+        dispatch(fetchCompanyIncomeData(ticker))
+      }
     },[dispatch,ticker])
+   
     const companyData = useSelector(selectCompanyData)
     const isLoading = useSelector(selectLoading)
     const companyIncomeData = useSelector(selectAnnualIncomeReport);
@@ -24,11 +29,16 @@ export default function CompanyDetails() {
       totalRevenue: Number(item.totalRevenue),
 
   }));
+  if(!ticker) return <div>INVALID TICKER</div>
   return (
     <div className='w-full min-h-screen bg-[#090b1c] p-9'>
       {!isLoading ?
       <>
-      <RenderCompanyData companyData={companyData}/>
+       {companyData ? (
+            <RenderCompanyData companyData={companyData} />
+          ) : (
+            <div className="text-white">Company data not available.</div>
+          )}
       <section className='w-7xl bg-amber-800-500 h-fit  mt-8  ml-auto mr-auto mb-16'>
       {companyIncomeData?.length>0 ? (
         <BarGraph data={formattedData} />

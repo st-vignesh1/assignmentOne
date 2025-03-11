@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 export default function LoadingSpinner({height}) {
@@ -6,4 +7,7 @@ export default function LoadingSpinner({height}) {
       <img src="/DoubleRingLoadingSpinner.svg" alt="Loading spinner"/>
       </div>
   )
+}
+LoadingSpinner.prototype={
+    height:PropTypes.string
 }
