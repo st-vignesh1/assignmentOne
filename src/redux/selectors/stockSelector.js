@@ -8,4 +8,7 @@ const selectStockHeaders = createSelector([selectStockData], (stockData) => stoc
 const selectTopGainers=createSelector(stockSelector,stock=>stock.topGainers)
 const selectTopLosers=createSelector(stockSelector,stock=>stock.topLosers)
 
+
+
+
 export { stockSelector,selectLoading, selectStockData, selectTopGainers, selectTopLosers, selectStockHeaders };

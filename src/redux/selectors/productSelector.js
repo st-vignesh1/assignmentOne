@@ -5,4 +5,7 @@ const selectProduct = state=>state.products;
 
 const selectAllCategoryProducts=createSelector(selectProduct,product=>product.allCategoryProducts)
 
-export {selectAllCategoryProducts}
+const selectAllCategory=createSelector(selectProduct,product=>product.productCategory)
+
+const selectProductHeaders = createSelector(selectProduct,product=>product.productHeaders)
+export {selectAllCategoryProducts,selectAllCategory,selectProductHeaders}
