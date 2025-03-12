@@ -15,5 +15,7 @@ const selectProductDataIsLoading=createSelector(selectProduct,product=>product.i
 
 const selectHasMoreProduct=createSelector(selectProduct,product=>product.hasMoreProduct)
 
-const selectPage=createSelector(selectProduct,product=>product.page)
-export {selectAllCategoryProducts,selectAllCategory,selectProductHeaders,selectedCategoryProduct,selectProductDataIsLoading,selectPage,selectHasMoreProduct}
+const selectAllCategoryPage=createSelector(selectProduct,product=>product.allCategorypage)
+
+const selectCategoryPage = createSelector(selectProduct,product=>product.categoryPage)
+export {selectAllCategoryProducts,selectAllCategory,selectProductHeaders,selectedCategoryProduct,selectProductDataIsLoading,selectHasMoreProduct,selectAllCategoryPage,selectCategoryPage}

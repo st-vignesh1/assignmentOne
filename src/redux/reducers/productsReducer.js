@@ -10,7 +10,8 @@ const initialState ={
     productHeaders:[],
     isLoading:false,
     error:"",
-    page:0,
+    allCategorypage:0,
+    categoryPage:0,
     hasMoreProduct:true
 }
 
@@ -19,6 +20,14 @@ const productSlice=createSlice({
     initialState,
     reducers:{
         setAllCategoryProducts(state,action){
+            if(state.allCategoryProducts.includes(action.payload.map((product) => ({
+                title: product.title,
+                category: product.category,
+                price: product.price,
+                rating: product.rating,
+                stock: product.stock,
+            }))))return ;
+        
             state.allCategoryProducts = [
                 ...state.allCategoryProducts,
                 ...action.payload.map((product) => ({
@@ -30,6 +39,7 @@ const productSlice=createSlice({
                 })),
             ];
             state.productHeaders=Object.keys(state.allCategoryProducts[0]);
+            state.allCategorypage+=1;
         },
         setIsLoading(state,action){
             state.isLoading=action.payload;
@@ -38,10 +48,22 @@ const productSlice=createSlice({
             state.productCategory=action.payload;
         },
         setCategoryProducts(state,action){
-            state.selectedCategoryProduct=action.payload
+          if(action.payload.length==0)return;
+          if(state.selectedCategoryProduct.length>0 && action.payload[0].category!==state.selectedCategoryProduct[0].category)state.selectedCategoryProduct=action.payload
+       else{
+
+           state.selectedCategoryProduct=[...state.selectedCategoryProduct,...action.payload.map((product) => ({
+               title: product.title,
+               category: product.category,
+               price: product.price,
+               rating: product.rating,
+               stock: product.stock,
+            }))]
+        }
         },
-        setPage(state,action){
-            state.page=action.payload;
+        setCategoryPage(state,action){
+    
+            state.categoryPage=action.payload;
         },
         setHasMoreProduct(state,action){
             state.hasMoreProduct=action.payload;
@@ -58,10 +80,10 @@ try{
     setIsLoading(true)
     const response = await axios.get(`https://dummyjson.com/products?limit=15&skip=${page*15}`);
     if(response?.data?.products.length==0)dispatch(setHasMoreProduct(false))
-        console.log("fetching.....")
+        else{
     dispatch(setAllCategoryProducts(response?.data?.products))
-    dispatch(setPage(page+1))
     setIsLoading(false)
+}
 }catch(error){
     console.error("Error fetching data:",error)
 }
@@ -80,19 +102,22 @@ export const fetchProductCategory = createAsyncThunk("productSlice/fetchProductC
 })
 
 
-export const fetchProductsByCategory = createAsyncThunk("productSlice/fetchProductsByCategory",async(category,{dispatch})=>{
+export const fetchProductsByCategory = createAsyncThunk("productSlice/fetchProductsByCategory",async({category,page},{dispatch})=>{
     try{
-        console.log("clicked")
+ 
         dispatch(setIsLoading(true))
-        const response = await axios.get(`https://dummyjson.com/products/category/${category}`);
-        if(response?.data?.products.length==0)dispatch(setHasMoreProduct(false))
-        dispatch(setCategoryProducts(response?.data?.products))
-     
-        dispatch(setIsLoading(false))
+        const response = await axios.get(`https://dummyjson.com/products/category/${category}?limit=15&skip=${page*15}`);
+  
+        if(response?.data.products.length==0){dispatch(setHasMoreProduct(false));dispatch(setIsLoading(false))}
+        else{
+    dispatch(setCategoryProducts(response?.data?.products))
+    dispatch(setCategoryPage(page+1))
+    dispatch(setIsLoading(false))
+}
     }catch(error){
         console.error("Error fetching data:",error)
     }
 })
 
-export const {setAllCategory,setIsLoading,setAllCategoryProducts,setCategoryProducts,setPage,setHasMoreProduct} = productSlice.actions;
+export const {setAllCategory,setIsLoading,setAllCategoryProducts,setCategoryProducts,setHasMoreProduct,setCategoryPage} = productSlice.actions;
 export default productSlice.reducer;
