@@ -65,11 +65,11 @@ export const fetchProductCategory = createAsyncThunk("productSlice/fetchProductC
 })
 
 
-export const fetchProductsByCategory = createAsyncThunk("productSlice/fetchProductsByCategory",async(url,{dispatch})=>{
+export const fetchProductsByCategory = createAsyncThunk("productSlice/fetchProductsByCategory",async(category,{dispatch})=>{
     try{
         dispatch(setIsLoading(true))
-        const response = await axios.get(url);
-        dispatch(setCategoryProducts(response?.data))
+        const response = await axios.get(`https://dummyjson.com/products/category/${category}`);
+        dispatch(setCategoryProducts(response?.data?.products))
         dispatch(setIsLoading(false))
     }catch(error){
         console.error("Error fetching data:",error)

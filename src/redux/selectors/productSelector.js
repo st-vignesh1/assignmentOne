@@ -8,4 +8,6 @@ const selectAllCategoryProducts=createSelector(selectProduct,product=>product.al
 const selectAllCategory=createSelector(selectProduct,product=>product.productCategory)
 
 const selectProductHeaders = createSelector(selectProduct,product=>product.productHeaders)
-export {selectAllCategoryProducts,selectAllCategory,selectProductHeaders}
+
+const selectedCategoryProduct = createSelector(selectProduct,product=>product.selectedCategoryProduct)
+export {selectAllCategoryProducts,selectAllCategory,selectProductHeaders,selectedCategoryProduct}
