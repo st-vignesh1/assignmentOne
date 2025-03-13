@@ -2,9 +2,9 @@ import React, {  useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllCategoryProducts, fetchProductCategory, fetchProductsByCategory, setCategoryPage } from '../redux/reducers/productsReducer'
 import { selectAllCategory, selectAllCategoryPage, selectAllCategoryProducts, selectCategoryPage, selectedCategoryProduct, selectHasMoreProduct, selectProductDataIsLoading, selectProductHeaders } from '../redux/selectors/productSelector';
-import Button from '../components/core/button/Button';
-import LoadingSpinner from '../components/core/loadingSpinner/LoadingSpinner';
-import RenderTable from '../components/core/table/RenderTable';
+import Button from '../components/core/Button/Button';
+import LoadingSpinner from '../components/core/LoadingSpinner/LoadingSpinner';
+import RenderTable from '../components/core/Table/RenderTable';
 import { useSearchParams } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -42,12 +42,7 @@ const hasMoreProduct = useSelector(selectHasMoreProduct)
       if (selectedCategory) {
           setSelectedCategory(selectedCategory.name);
           setSearchParams({ category: selectedCategory.slug });
-  
-         
           dispatch(setCategoryPage(0)); 
-      
-  
-
           dispatch(fetchProductsByCategory({ category: selectedCategory.slug, page: 0 }));
       }
   }
