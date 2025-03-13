@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { fetchStockData } from "../redux/reducers/stockReducer";
 import LoadingSpinner from '../components/core/loadingSpinner/LoadingSpinner';
 import { Link } from 'react-router-dom';
+
 export default function Home() {
     const headers = useSelector(selectStockHeaders);
     const topGainers = useSelector(selectTopGainers);
