@@ -49,7 +49,8 @@ const productSlice=createSlice({
         },
         setCategoryProducts(state,action){
           if(action.payload.length==0)return;
-          if(state.selectedCategoryProduct.length>0 && action.payload[0].category!==state.selectedCategoryProduct[0].category)state.selectedCategoryProduct=action.payload
+          if(state.selectedCategoryProduct.length==0 || action.payload[0].category!==state.selectedCategoryProduct[0].category ){
+            state.selectedCategoryProduct=action.payload}
        else{
 
            state.selectedCategoryProduct=[...state.selectedCategoryProduct,...action.payload.map((product) => ({
@@ -62,7 +63,6 @@ const productSlice=createSlice({
         }
         },
         setCategoryPage(state,action){
-    
             state.categoryPage=action.payload;
         },
         setHasMoreProduct(state,action){
@@ -107,7 +107,7 @@ export const fetchProductsByCategory = createAsyncThunk("productSlice/fetchProdu
  
         dispatch(setIsLoading(true))
         const response = await axios.get(`https://dummyjson.com/products/category/${category}?limit=15&skip=${page*15}`);
-  
+        console.log(response)
         if(response?.data.products.length==0){dispatch(setHasMoreProduct(false));dispatch(setIsLoading(false))}
         else{
     dispatch(setCategoryProducts(response?.data?.products))
