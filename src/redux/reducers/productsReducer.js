@@ -167,10 +167,10 @@ export const fetchAddedProduct = createAsyncThunk('productSlice/fetchAddedProduc
 export const fetchModifiedProduct = createAsyncThunk(
     "productSlice/fetchModifiedProduct",
     async ({ id, updatedProduct }, { dispatch}) => {
-        console.log(updatedProduct)
+   
       try {
         const response = await axios.patch(`https://dummyjson.com/products/${id}`,{...updatedProduct})
-        console.log(response.data)
+
         dispatch(setUpdatedProduct([response.data]))
       } catch (error) {
         console.error("Error Updating Data:", error);

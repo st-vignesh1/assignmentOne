@@ -4,9 +4,7 @@ import { fetchAllCategoryProducts, fetchProductCategory, setCategoryPage } from 
 import { selectAllCategory, selectAllCategoryPage, selectAllCategoryProducts, selectCategoryPage, selectedCategoryProduct, selectHasMoreProduct, selectProductDataIsLoading, selectProductHeaders } from '../redux/selectors/productSelector';
 import Button from '../components/core/Button/Button';
 import LoadingSpinner from '../components/core/LoadingSpinner/LoadingSpinner';
-import RenderTable from '../components/core/Table/RenderTable';
 import { useSearchParams } from 'react-router-dom';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import Modal from '../components/core/Modal/Modal';
 import ModalContent from '../components/ModaContent/ModalContent';
 import ProductTable from '../components/ProductsTable.jsx/ProductTable';
@@ -43,7 +41,7 @@ const hasMoreProduct = useSelector(selectHasMoreProduct)
 
   function handlePassEditProduct(e, { id }) {
     e.preventDefault();
-    console.log("Clicked product ID:", id);
+
   
     let filteredProduct = [];
     if (selectedProduct && Array.isArray(selectedProduct)) {
@@ -53,7 +51,7 @@ const hasMoreProduct = useSelector(selectHasMoreProduct)
     if (filteredProduct.length === 0 && allCategoryProducts && Array.isArray(allCategoryProducts)) {
       filteredProduct = allCategoryProducts.filter((product) => product.id === id);
     }
-  console.log(filteredProduct)
+ 
     setEditProduct(filteredProduct);
     if (filteredProduct.length > 0) {
       handleModal(); 
