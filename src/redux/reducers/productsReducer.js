@@ -20,7 +20,7 @@ const productSlice=createSlice({
     name:"productSlice",
     initialState,
     reducers:{
-        setAllCategoryProducts(state,action){
+        setAllCategoryProducts(state, action) {
             const newProducts = action.payload.map((product) => ({
                 id: product.id,
                 title: product.title,
@@ -29,20 +29,22 @@ const productSlice=createSlice({
                 rating: product.rating,
                 stock: product.stock,
             }));
-        
-            if (state.allCategoryProducts.some((product) => 
-                newProducts.find((newProduct) => newProduct.id === product.id)
-            )) ;
+
+            const existingProductIds = new Set(
+                state.allCategoryProducts.map((product) => product.id)
+            );
+
             state.allCategoryProducts = [
                 ...state.allCategoryProducts,
-                ...newProducts,
+                ...newProducts.filter((product) => !existingProductIds.has(product.id)),
             ];
-            state.productHeaders = Object.keys(state.allCategoryProducts[0]).filter(key => key !== 'id');
-            state.allCategorypage+=1;
-            console.log(action.type)
-            if(action.type==="productSlice/fetchAddedProduct") {
-                console.log("toppppppp")
-                state.allCategoryProducts=setAllCategory.allCategoryProducts.unshift(action.payload)}
+
+            if (state.allCategoryProducts.length > 0) {
+                state.productHeaders = Object.keys(state.allCategoryProducts[0]).filter(
+                    (key) => key !== "id"
+                );
+            }
+            state.allCategorypage += 1;
         },
         setIsLoading(state,action){
             state.isLoading=action.payload;

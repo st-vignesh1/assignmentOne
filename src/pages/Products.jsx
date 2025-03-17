@@ -1,6 +1,6 @@
 import React, {  useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllCategoryProducts, fetchProductCategory, fetchProductsByCategory, setCategoryPage } from '../redux/reducers/productsReducer'
+import { fetchAllCategoryProducts, fetchProductCategory, setCategoryPage } from '../redux/reducers/productsReducer'
 import { selectAllCategory, selectAllCategoryPage, selectAllCategoryProducts, selectCategoryPage, selectedCategoryProduct, selectHasMoreProduct, selectProductDataIsLoading, selectProductHeaders } from '../redux/selectors/productSelector';
 import Button from '../components/core/Button/Button';
 import LoadingSpinner from '../components/core/LoadingSpinner/LoadingSpinner';
@@ -9,6 +9,8 @@ import { useSearchParams } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Modal from '../components/core/Modal/Modal';
 import ModalContent from '../components/ModaContent/ModalContent';
+import ProductTable from '../components/ProductsTable.jsx/ProductTable';
+import CategoryButton from '../components/CategoryButton/CategoryButton';
 
 export default function Products() {
  const [isCategorySelected,setIsCategorySelected]=useState(false);
@@ -28,32 +30,16 @@ const hasMoreProduct = useSelector(selectHasMoreProduct)
     },[dispatch])
 
     let allCategoryProducts=useSelector(selectAllCategoryProducts)
-
     allCategoryProducts=allCategoryProducts?.length &&
     allCategoryProducts.map((product) => ({
         ...product,
         action: <Button content="edit" onClick={handlePassEditProduct} id={product.id}/>
     }));
-   
     const allCategory = useSelector(selectAllCategory);
-
     let productHeaders =useSelector(selectProductHeaders)
     productHeaders=productHeaders?.length && [...productHeaders,"action"]
     const productDataIsLoading = useSelector(selectProductDataIsLoading)  
-    function handleSelectCategory(e, {content:category}) {
-      e.preventDefault();
-  
-      if (!isCategorySelected) setIsCategorySelected(true);
-  
-      const selectedCategory = allCategory.find((cat) => category === cat.name);
-  
-      if (selectedCategory) {
-          setSelectedCategory(selectedCategory.name);
-          setSearchParams({ category: selectedCategory.slug });
-          dispatch(setCategoryPage(0)); 
-          dispatch(fetchProductsByCategory({ category: selectedCategory.slug, page: 0 }));
-      }
-  }
+    
 
   function handlePassEditProduct(e, { id }) {
     e.preventDefault();
@@ -89,19 +75,12 @@ const hasMoreProduct = useSelector(selectHasMoreProduct)
   return (
     <div className='w-full min-h-screen p-8'>
       <h1 className='text-2xl font-semibold mb-8 text-center'>Products Page</h1>
-      <div className='flex gap-4 mb-8 justify-center'>
-   {allCategory?.length>0 ?
-   allCategory.map((category,index)=><Button content={category.name} key={index} onClick={handleSelectCategory} selectedCategory={selectedCategory}/>)
-   :<LoadingSpinner spinnerHeight="h-10"/>}
-      </div >
+      <CategoryButton allCategory={allCategory} setIsCategorySelected={setIsCategorySelected}isCategorySelected={isCategorySelected}setSelectedCategory={setSelectedCategory}setCategoryPage={setCategoryPage} setSearchParams={setSearchParams} selectedCategory={selectedCategory}/>
       <div className='flex justify-center items-center mb-8'>
    {allCategory?.length>0 || selectedProduct?.length>0 ? <Button content="Add Item" onClick={handleModal}/>:<LoadingSpinner spinnerHeight="h-10" />}
   { isModalOpen && <Modal setIsModalOpen={setIsModalOpen}><ModalContent setIsModalOpen={setIsModalOpen} editProduct={editProduct[0]}/></Modal>}
       </div>
-      <div>
-      {!isCategorySelected && allCategoryProducts?.length>0 && productHeaders?.length>0 && <InfiniteScroll dataLength={allCategoryProducts.length} next={()=>dispatch(fetchAllCategoryProducts(allCategorypage)) }hasMore={hasMoreProduct}><RenderTable headers={productHeaders} data={allCategoryProducts}/></InfiniteScroll>}
-      {isCategorySelected && selectedProduct?.length>0 &&productHeaders?.length>0 && !productDataIsLoading&&<InfiniteScroll dataLength={selectedProduct.length} next={()=>dispatch(fetchProductsByCategory({ category: searchParams.get("category"), page: categoryPage } ))} hasMore={hasMoreProduct}><RenderTable headers={productHeaders} data={selectedProduct}/></InfiniteScroll>}
-      </div>
+      <ProductTable isCategorySelected={isCategorySelected} allCategoryProducts={allCategoryProducts} productHeaders={productHeaders} selectedProduct={selectedProduct} productDataIsLoading={productDataIsLoading} allCategorypage={allCategorypage} hasMoreProduct={hasMoreProduct}categoryPage={categoryPage} searchParams={searchParams}/>
     </div>
   )
 }

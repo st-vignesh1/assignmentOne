@@ -10,5 +10,6 @@ export default function IconLabel({Icon,text,textColor}) {
 }
 IconLabel.propTypes={
     text:PropTypes.string.isRequired,
-
+    Icon: PropTypes.elementType.isRequired, 
+    textColor:PropTypes.string,
 }

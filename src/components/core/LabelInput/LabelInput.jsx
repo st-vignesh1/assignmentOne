@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
 export default function LabelInput({label,value,setValue}) {
@@ -7,4 +8,9 @@ export default function LabelInput({label,value,setValue}) {
     <input type="text" id={label} className='border-1 rounded-sm p-4' value={value} onChange={(e)=>setValue(e.target.value)}/>
     </div>
   )
+}
+LabelInput.propTypes={
+  label:PropTypes.string,
+  value:PropTypes.string,
+  setValue:PropTypes.func
 }

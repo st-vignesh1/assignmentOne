@@ -36,7 +36,7 @@ export default function ModalContent({setIsModalOpen,editProduct}) {
         <LabelInput label="category" value={category} setValue={setCategory}/>
         <LabelInput label="price" value={price} setValue={setprice}/>
         <div className='flex justify-between'>
-            <Button content="add" onClick={editProduct?handleEditProduct:handleAddNewProduct}/>
+            <Button content={editProduct?"Edit":"add"} onClick={editProduct?handleEditProduct:handleAddNewProduct}/>
             <Button content="cancel" onClick={handleCloseModal}/>
         </div>
       </form>

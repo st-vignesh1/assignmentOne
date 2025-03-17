@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import ReactDom from 'react-dom'
 export default function Modal({children,setIsModalOpen}) {
@@ -11,3 +12,6 @@ export default function Modal({children,setIsModalOpen}) {
   )
 }
  
+Modal.propTypes={
+  setIsModalOpen:PropTypes.func
+}
