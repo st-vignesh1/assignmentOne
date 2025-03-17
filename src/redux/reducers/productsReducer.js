@@ -40,6 +40,10 @@ const productSlice=createSlice({
             ];
             state.productHeaders=Object.keys(state.allCategoryProducts[0]);
             state.allCategorypage+=1;
+            console.log(action.type)
+            if(action.type==="productSlice/fetchAddedProduct") {
+                console.log("toppppppp")
+                state.allCategoryProducts=setAllCategory.allCategoryProducts.unshift(action.payload)}
         },
         setIsLoading(state,action){
             state.isLoading=action.payload;
@@ -118,6 +122,18 @@ export const fetchProductsByCategory = createAsyncThunk("productSlice/fetchProdu
         console.error("Error fetching data:",error)
     }
 })
+
+export const fetchAddedProduct = createAsyncThunk('productSlice/fetchAddedProduct',async(newProduct,{dispatch})=>{
+    try{
+        const response =await  axios.post("https://dummyjson.com/products/add",newProduct);
+        dispatch(setAllCategoryProducts([response.data]));
+        
+    }catch(error){
+        console.error("Error Adding data:",error)
+    }
+} )
+
+// export const fetchModifiedProduct=createAsyncThunk("productSlice/fetchModifiedProduct",async())
 
 export const {setAllCategory,setIsLoading,setAllCategoryProducts,setCategoryProducts,setHasMoreProduct,setCategoryPage} = productSlice.actions;
 export default productSlice.reducer;

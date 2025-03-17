@@ -54,6 +54,9 @@ const hasMoreProduct = useSelector(selectHasMoreProduct)
     setIsModalOpen(true)
   }
     const selectedProduct=useSelector(selectedCategoryProduct)
+
+  console.log(allCategoryProducts);
+
   return (
     <div className='w-full min-h-screen p-8'>
       <h1 className='text-2xl font-semibold mb-8 text-center'>Products Page</h1>
