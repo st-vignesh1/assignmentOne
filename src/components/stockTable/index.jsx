@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import RenderTable from "../core/table/RenderTable"
+import RenderTable from "../core/Table/RenderTable"
 export default function StockTable({title,headers,data,titleColor,linkColumn}) {
   return (
     <div className='w-full min-h-screen'>

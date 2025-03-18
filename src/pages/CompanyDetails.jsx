@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { fetchCompanyData } from '../redux/reducers/companyDataReducer';
 import RenderCompanyData from '../components/companyDetails';
-import { selectCompanyData, selectLoading } from '../redux/selectors/companyDataSelector';
-import LoadingSpinner from '../components/core/loadingSpinner/LoadingSpinner';
-import BarGraph from '../components/core/barchart/BarGraph';
+import {  selectCompanyDataSelector, selectLoadingSelector } from '../redux/selectors/companyData';
+import LoadingSpinner from '../components/core/LoadingSpinner';
+import BarGraph from '../components/core/BarChart';
 import { fetchCompanyIncomeData } from '../redux/reducers/incomeStatementReducer';
-import { selectAnnualIncomeReport } from '../redux/selectors/companyIncomeSelector';
+import {  selectAnnualIncomeReportSelector } from '../redux/selectors/companyIncome';
 
 export default function CompanyDetails() {
     const {ticker} =useParams();
@@ -21,9 +21,9 @@ export default function CompanyDetails() {
       }
     },[dispatch,ticker])
    
-    const companyData = useSelector(selectCompanyData)
-    const isLoading = useSelector(selectLoading)
-    const companyIncomeData = useSelector(selectAnnualIncomeReport);
+    const companyData = useSelector(selectCompanyDataSelector)
+    const isLoading = useSelector(selectLoadingSelector)
+    const companyIncomeData = useSelector(selectAnnualIncomeReportSelector);
     const formattedData = companyIncomeData.map(item => ({
       ...item,
       totalRevenue: Number(item.totalRevenue),

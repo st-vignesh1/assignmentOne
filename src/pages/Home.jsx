@@ -1,16 +1,17 @@
 
 import StockTable from '../components/stockTable';
 import { useDispatch, useSelector } from "react-redux";
-import { selectLoading, selectStockHeaders, selectTopGainers, selectTopLosers } from "../redux/selectors/stockSelector";
+import {  selectLoadingSelector,  selectStockHeadersSelector,  selectTopGainersSelector, selectTopLosersSelector } from "../redux/selectors/stock";
 import { useEffect } from "react";
 import { fetchStockData } from "../redux/reducers/stockReducer";
-import LoadingSpinner from '../components/core/loadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../components/core/LoadingSpinner';
 import { Link } from 'react-router-dom';
+
 export default function Home() {
-    const headers = useSelector(selectStockHeaders);
-    const topGainers = useSelector(selectTopGainers);
-    const topLosers = useSelector(selectTopLosers);
-    const isLoading = useSelector(selectLoading);
+    const headers = useSelector(selectStockHeadersSelector);
+    const topGainers = useSelector(selectTopGainersSelector);
+    const topLosers = useSelector(selectTopLosersSelector);
+    const isLoading = useSelector(selectLoadingSelector);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchStockData())
