@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 import { CiLocationOn } from 'react-icons/ci'
-import IconLabel from '../core/iconLabel/IconLabel'
+import IconLabel from "../core/IconLabel/IconLabel"
 import { HiOutlineBuildingOffice } from "react-icons/hi2";
 
 export default function RenderCompanyData({companyData}) {
