@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom'
 import { fetchCompanyData } from '../redux/reducers/companyDataReducer';
 import RenderCompanyData from '../components/companyDetails';
 import {  selectCompanyDataSelector, selectLoadingSelector } from '../redux/selectors/companyData';
-import LoadingSpinner from '../components/core/loadingSpinner/LoadingSpinner';
-import BarGraph from '../components/core/barchart/BarGraph';
+import LoadingSpinner from '../components/core/LoadingSpinner';
+import BarGraph from '../components/core/BarChart';
 import { fetchCompanyIncomeData } from '../redux/reducers/incomeStatementReducer';
 import {  selectAnnualIncomeReportSelector } from '../redux/selectors/companyIncome';
 

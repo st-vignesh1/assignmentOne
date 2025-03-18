@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import Button from "../../components/core/Button/Button";
+import Button from "../../components/core/Button";
 
 
 

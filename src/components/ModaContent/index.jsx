@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import LabelInput from '../core/LabelInput/LabelInput'
-import Button from '../core/Button/Button'
+import LabelInput from '../core/LabelInput'
+import Button from '../core/Button'
 import { useDispatch } from 'react-redux'
 import { fetchAddedProduct, fetchModifiedProduct } from '../../redux/reducers/productsReducer'
 

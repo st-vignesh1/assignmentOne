@@ -1,8 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { fetchProductsByCategory } from '../../redux/reducers/productsReducer';
-import LoadingSpinner from '../core/LoadingSpinner/LoadingSpinner';
-import Button from '../core/Button/Button';
+import LoadingSpinner from '../core/LoadingSpinner';
+import Button from '../core/Button';
 
 export default function CategoryButton({allCategory,setIsCategorySelected,isCategorySelected,setSelectedCategory,setCategoryPage,setSearchParams,selectedCategory}) {
 const dispatch = useDispatch()

@@ -2,13 +2,13 @@ import React, {  useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllCategoryProducts, fetchProductCategory, setCategoryPage } from '../redux/reducers/productsReducer'
 import { selectAllCategorySelector, selectAllCategoryPageSelector, selectAllCategoryProductsSelector,selectedCategoryProductSelector, selectHasMoreProductSelector, selectProductDataIsLoadingSelector, selectProductHeadersSelector } from '../redux/selectors/product';
-import Button from '../components/core/Button/Button';
-import LoadingSpinner from '../components/core/LoadingSpinner/LoadingSpinner';
+import Button from '../components/core/Button';
+import LoadingSpinner from '../components/core/LoadingSpinner';
 import { useSearchParams } from 'react-router-dom';
-import Modal from '../components/core/Modal/Modal';
-import ModalContent from '../components/ModaContent/ModalContent';
-import ProductTable from '../components/ProductsTable/ProductTable';
-import CategoryButton from '../components/CategoryButton/CategoryButton';
+import Modal from '../components/core/Modal';
+import ModalContent from '../components/ModaContent';
+import ProductTable from '../components/ProductsTable';
+import CategoryButton from '../components/CategoryButton';
 
 export default function Products() {
  const [isCategorySelected,setIsCategorySelected]=useState(false);

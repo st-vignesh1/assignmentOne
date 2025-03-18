@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {  selectLoadingSelector,  selectStockHeadersSelector,  selectTopGainersSelector, selectTopLosersSelector } from "../redux/selectors/stock";
 import { useEffect } from "react";
 import { fetchStockData } from "../redux/reducers/stockReducer";
-import LoadingSpinner from '../components/core/loadingSpinner/LoadingSpinner';
+import LoadingSpinner from '../components/core/LoadingSpinner';
 import { Link } from 'react-router-dom';
 
 export default function Home() {
