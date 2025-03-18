@@ -1,13 +1,13 @@
 import React, {  useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllCategoryProducts, fetchProductCategory, setCategoryPage } from '../redux/reducers/productsReducer'
-import { selectAllCategory, selectAllCategoryPage, selectAllCategoryProducts, selectCategoryPage, selectedCategoryProduct, selectHasMoreProduct, selectProductDataIsLoading, selectProductHeaders } from '../redux/selectors/productSelector';
+import { selectAllCategorySelector, selectAllCategoryPageSelector, selectAllCategoryProductsSelector,selectedCategoryProductSelector, selectHasMoreProductSelector, selectProductDataIsLoadingSelector, selectProductHeadersSelector } from '../redux/selectors/product';
 import Button from '../components/core/Button/Button';
 import LoadingSpinner from '../components/core/LoadingSpinner/LoadingSpinner';
 import { useSearchParams } from 'react-router-dom';
 import Modal from '../components/core/Modal/Modal';
 import ModalContent from '../components/ModaContent/ModalContent';
-import ProductTable from '../components/ProductsTable.jsx/ProductTable';
+import ProductTable from '../components/ProductsTable/ProductTable';
 import CategoryButton from '../components/CategoryButton/CategoryButton';
 
 export default function Products() {
@@ -16,9 +16,9 @@ export default function Products() {
  const [searchParams,setSearchParams]=useSearchParams({category:""})
 const [isModalOpen,setIsModalOpen]=useState(false);
 const [editProduct,setEditProduct]=useState([]);
-const allCategorypage =useSelector(selectAllCategoryPage)
-const categoryPage = useSelector(selectCategoryPage)
-const hasMoreProduct = useSelector(selectHasMoreProduct)
+const allCategorypage =useSelector(selectAllCategoryPageSelector)
+const categoryPage = useSelector(selectAllCategoryPageSelector)
+const hasMoreProduct = useSelector(selectHasMoreProductSelector)
 
     const dispatch =useDispatch();
     useEffect(()=>{
@@ -27,16 +27,16 @@ const hasMoreProduct = useSelector(selectHasMoreProduct)
       
     },[dispatch])
 
-    let allCategoryProducts=useSelector(selectAllCategoryProducts)
+    let allCategoryProducts=useSelector(selectAllCategoryProductsSelector)
     allCategoryProducts=allCategoryProducts?.length &&
     allCategoryProducts.map((product) => ({
         ...product,
         action: <Button content="edit" onClick={handlePassEditProduct} id={product.id}/>
     }));
-    const allCategory = useSelector(selectAllCategory);
-    let productHeaders =useSelector(selectProductHeaders)
+    const allCategory = useSelector(selectAllCategorySelector);
+    let productHeaders =useSelector(selectProductHeadersSelector)
     productHeaders=productHeaders?.length && [...productHeaders,"action"]
-    const productDataIsLoading = useSelector(selectProductDataIsLoading)  
+    const productDataIsLoading = useSelector(selectProductDataIsLoadingSelector)  
     
 
   function handlePassEditProduct(e, { id }) {
@@ -63,7 +63,7 @@ const hasMoreProduct = useSelector(selectHasMoreProduct)
   function handleModal(){
     setIsModalOpen(true)
   }
-    let selectedProduct=useSelector(selectedCategoryProduct)
+    let selectedProduct=useSelector(selectedCategoryProductSelector)
    
     selectedProduct=selectedProduct?.length && selectedProduct.map((product) => ({
       ...product,
